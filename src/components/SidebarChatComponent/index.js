@@ -1,25 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Avatar } from '@material-ui/core'
 import { Container, Texts, NewChatMenu } from './styles';
+import database from '../../firebase'
+import { Link } from 'react-router-dom'
 
-function SidebarChatComponent({ newChat }) {
+function SidebarChatComponent({id, name, newChat, room }) {
 
   const createChat = () => {
-    const personName = prompt('name')
+    const roomName = prompt('name')
 
-    if (personName) {
-      // last
+    if (roomName) {
+      database.collection('rooms').add({
+        name: roomName,
+      })
     }
   };
 
   return !newChat ? (
-    <Container>
-      <Avatar />
-      <Texts>
-        <h2>Kevin</h2>
-        <p>pai eu so viado kk</p>
-      </Texts>
-    </Container>
+    <Link to={`/c/${id}`}>
+      <Container>
+        <Avatar />
+        <Texts>
+          <h2>{name}</h2>
+          <p>pai eu so viado kk</p>
+        </Texts>
+      </Container>
+    </Link>
   ) : (
     <NewChatMenu onClick={createChat}>
       <Container>

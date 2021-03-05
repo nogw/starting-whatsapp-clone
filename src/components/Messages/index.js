@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Avatar, IconButton } from '@material-ui/core'
 import { SearchOutlined, AttachFile, MoreVert } from '@material-ui/icons/'
 
@@ -6,9 +6,22 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import MicIcon from '@material-ui/icons/Mic'
 
 import { Container, Header, Content, Footer, Texts, RightContent, Message } from './styles';
+import { useParams } from 'react-router-dom'
+
+import database from '../../firebase'
 
 function Messages() {
   const [input, setInput] = useState("")
+  const { roomId } = useParams();
+  const [roomName, setRoomName] = useState("");
+
+  useEffect(() => {
+    if (roomId) {
+      database.collection('rooms').doc(roomId).onSnapshot(snapshot => (
+        setRoomName(snapshot.data().name)
+      ))
+    }
+  }, [roomId])
 
   const sendMessage = e => {
     e.preventDefault(e)
@@ -22,7 +35,7 @@ function Messages() {
         <Avatar />
         <Texts>
           <h3>
-            Kevin
+            {roomName}
           </h3>
           <p>
             Last seen at 19h...
