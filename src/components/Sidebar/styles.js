@@ -4,7 +4,7 @@ export const Container = styled.div`
   /* flex: 0.35;  */
   display: flex;
   flex-direction: column;
-  flex: 0.34; 
+  flex: 0.35; 
 `;
 
 export const Header = styled.div`
@@ -27,13 +27,37 @@ export const HeaderRight = styled.div`
 `;
 
 export const Search = styled.div`
-
-`;
-
-export const Chats = styled.div`
-
+  display: flex;
+  align-items: center;
+  background-color: #f6f6f6;
+  height: 40px;
+  padding: 10px;
 `;
 
 export const SearchInput = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 19px;
+  width: 100%;
+  height: 32px;
 
+  > .MuiSvgIcon-root {
+    color: gray;
+    padding: 1px;
+    margin-left: 10px;
+  }
+
+  > input {
+    border: none;
+    margin-left: 10px;
+    margin-right: 5px;
+  }
+`;
+
+export const Chats = styled.div`
+  flex: 1;
+  overflow: auto;
+  overflow-x: hidden;
+  background-color: #fff;
 `;

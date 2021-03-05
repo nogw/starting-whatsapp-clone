@@ -5,6 +5,7 @@ import ChatIcon  from '@material-ui/icons/Chat'
 import MoreVertIcon  from '@material-ui/icons/MoreVert'
 import SearchOutlined from '@material-ui/icons/SearchOutlined'
 import { Container, Header, HeaderRight, Search, Chats, SearchInput } from './styles';
+import SidebarChatComponent from '../SidebarChatComponent'
 
 function Sidebar() {
   return (
@@ -31,7 +32,8 @@ function Sidebar() {
         </SearchInput>
       </Search>
       <Chats>
-
+        <SidebarChatComponent newChat />
+        <SidebarChatComponent />
       </Chats>
     </Container>
   );
