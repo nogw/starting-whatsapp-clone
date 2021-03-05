@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar, IconButton } from '@material-ui/core'
 import { SearchOutlined, AttachFile, MoreVert } from '@material-ui/icons/'
+
+import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
+import MicIcon from '@material-ui/icons/Mic'
+
 import { Container, Header, Content, Footer, Texts, RightContent, Message } from './styles';
 
 function Messages() {
+  const [input, setInput] = useState("")
+
+  const sendMessage = e => {
+    e.preventDefault(e)
+    console.log(`you typed => ${input}`)
+    setInput("")
+  }
+  
   return (
     <Container>
       <Header>
@@ -19,9 +31,6 @@ function Messages() {
         <RightContent>
           <IconButton>
             <SearchOutlined />
-          </IconButton>
-          <IconButton>
-            <AttachFile />
           </IconButton>
           <IconButton>
             <MoreVert />
@@ -42,7 +51,26 @@ function Messages() {
       </Content>
       
       <Footer>
+        <IconButton>
+          <InsertEmoticonIcon />
+        </IconButton>
+        <IconButton>
+          <AttachFile />
+        </IconButton>
 
+        <form>
+          <input 
+            value={input} 
+            onChange={(e) => setInput(e.target.value)} 
+            type="text" 
+            placeholder="Type a message"
+          />
+          <button onClick={sendMessage} type="submit">sent</button>
+        </form>
+
+        <IconButton>
+          <MicIcon />
+        </IconButton>
       </Footer>
     </Container>
   );

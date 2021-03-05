@@ -46,10 +46,6 @@ export const Content = styled.div`
   }
 `;
 
-export const Footer = styled.div`
-
-`;
-
 export const RightContent = styled.div`
   display: flex;
   justify-content: space-between;
@@ -78,5 +74,30 @@ export const Message = styled.p`
     color: #82b2ad;
     margin-left: 8px;
     font-size: 9px;
+  }
+`;
+
+export const Footer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 62px;
+  border-top: 1px solid lightgray;
+
+  form {
+    flex: 1;
+    display: flex;
+
+    input {
+      flex: 1;
+      border-radius: 28px;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      display: none;
+    }
   }
 `;
