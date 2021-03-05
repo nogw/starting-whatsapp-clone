@@ -31,7 +31,13 @@ function Messages() {
       
       <Content>
         <Message>
-          Testing
+          <span className="name">kevin</span>
+          in consectetur purus tristique sed. <span className="timesent">3:43pm</span>
+        </Message>
+        {/* message.name === user.displayName */}
+        <Message className={`${true && 'receiver'}`}>
+          <span className="name">kevin</span>
+          sit amet, consectetur <span className="timesent">3:43pm</span>
         </Message>
       </Content>
       

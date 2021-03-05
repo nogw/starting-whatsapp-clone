@@ -1,12 +1,12 @@
 import React from 'react';
 import Sidebar from '../Sidebar';
-import Messages from '../Messages'
+import Messages  from '../Messages'
 import { Container } from './styles';
 
 function Whatsapp() {
   return (
     <Container>
-      <Sidebar/>
+      <Sidebar />
       <Messages />
     </Container>
   );

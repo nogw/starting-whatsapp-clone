@@ -34,6 +34,16 @@ export const Content = styled.div`
   background-position: center;
   padding: 30px;
   overflow: auto;
+
+  .receiver {
+    margin-left: auto;
+    background-color: #dcf8c6;
+    border-radius: 10px 0px 10px 10px;
+
+    .name {
+      display: none;
+    }
+  }
 `;
 
 export const Footer = styled.div`
@@ -46,6 +56,27 @@ export const RightContent = styled.div`
   min-width: 100px;
 `;
 
-export const Message = styled.div`
+export const Message = styled.p`
+  position: relative;
+  font-size: 16px;
+  padding: 10px 10px 8px 10px;
+  border-radius: 0px 10px 10px 10px;
+  background-color: #fff;
+  width: fit-content;
+  margin-bottom: 10px;
 
+  .name {
+    display: block;
+    color: pink;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  .timesent {
+    position: relative;
+    top: 4px;
+    color: #82b2ad;
+    margin-left: 8px;
+    font-size: 9px;
+  }
 `;
