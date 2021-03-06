@@ -40,7 +40,7 @@ function Messages() {
     }
   }, [roomId])
 
-  const sendMessage = async e => {
+  const sendMessage = e => {
     e.preventDefault(e)
     console.log(`you typed => ${input}`)
     console.log(user.displayName)
@@ -56,6 +56,19 @@ function Messages() {
     setInput("")
     scrollToRef()          
   }
+
+  function timeformat(date) {
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var x = h >= 12 ? 'pm' : 'am';
+    h = h % 12;
+    h = h ? h : 12;
+    m = m < 10 ? '0'+m: m;
+    var mytime= h + ':' + m + x;
+    return mytime;
+  }
+
+  
   
   return (
     <Container>
@@ -68,7 +81,7 @@ function Messages() {
           <p>
             Last seen at{" "}
             {
-              new Date(messages[messages.length - 1]?.timestamp?.toDate()).toUTCString()
+              timeformat(new Date(messages[messages.length - 1]?.timestamp?.toDate()))
             }
           </p>
         </Texts>
@@ -89,7 +102,7 @@ function Messages() {
               <span className="name">{message.user}</span>
               {message.message}<span className="timesent">
                 {
-                  new Date(message.timestamp?.toDate()).toUTCString()
+                  timeformat(new Date(message.timestamp?.toDate()))
                 }
               </span>
             </Message>
