@@ -7,12 +7,14 @@ import SearchOutlined from '@material-ui/icons/SearchOutlined'
 import { Container, Header, HeaderRight, Search, Chats, SearchInput } from './styles';
 import SidebarChatComponent from '../SidebarChatComponent'
 import database from '../../firebase'
+import { useStateValue } from '../../ContextProvider'
 
 function Sidebar() {
   const [rooms, setRooms] = useState([])
+  const [{ user }, dispatch] = useStateValue()
 
   useEffect(() => {
-    database.collection('rooms').onSnapshot((snapshot) => 
+    const unsubscribe = database.collection('rooms').onSnapshot((snapshot) => 
       setRooms(
         snapshot.docs.map((doc) => ({
           id: doc.id,
@@ -20,12 +22,16 @@ function Sidebar() {
       }))
       )
     );
+
+    return () => {
+      unsubscribe();
+    }
   }, [])
 
   return (
     <Container>
       <Header>
-        <Avatar/>
+        <Avatar src={user?.photoURL}/>
         <HeaderRight>
           <IconButton>
             <DonutLargeIcon />
@@ -42,7 +48,7 @@ function Sidebar() {
         <SearchInput>
           <SearchOutlined />
           {/* search or start "a new chat */}
-          <input type="text" placeholder="Search chat"/>
+          <input type="text" placeholder="Search or start a new conversation"/>
         </SearchInput>
       </Search>
       <Chats>

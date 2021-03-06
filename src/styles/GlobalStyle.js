@@ -16,6 +16,11 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     place-items: center;
     background-color: #dadbd3;
+  
+    a {
+      text-decoration: none;
+      color: #000;
+    }
   }
 `;
 

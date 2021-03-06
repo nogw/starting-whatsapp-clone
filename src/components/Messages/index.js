@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Avatar, IconButton } from '@material-ui/core'
 import { SearchOutlined, AttachFile, MoreVert } from '@material-ui/icons/'
 
@@ -9,24 +9,52 @@ import { Container, Header, Content, Footer, Texts, RightContent, Message } from
 import { useParams } from 'react-router-dom'
 
 import database from '../../firebase'
+import firebase from 'firebase'
+import { useStateValue } from '../../ContextProvider'
 
 function Messages() {
   const [input, setInput] = useState("")
   const { roomId } = useParams();
   const [roomName, setRoomName] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [{ user }, dispatch] = useStateValue()
+
+  const contentRef = useRef(null)
+  const scrollToRef = () => contentRef.current.scrollTo(0, contentRef.current.scrollTopMax)
 
   useEffect(() => {
     if (roomId) {
       database.collection('rooms').doc(roomId).onSnapshot(snapshot => (
         setRoomName(snapshot.data().name)
       ))
+
+      database.collection('rooms')
+      .doc(roomId)
+      .collection('messages')
+      .orderBy('timestamp', 'asc')
+      .onSnapshot((snapshot) => 
+        setMessages(snapshot.docs.map((doc) => 
+          doc.data()
+        ))
+      );
     }
   }, [roomId])
 
-  const sendMessage = e => {
+  const sendMessage = async e => {
     e.preventDefault(e)
     console.log(`you typed => ${input}`)
+    console.log(user.displayName)
+
+    database.collection('rooms')
+    .doc(roomId)
+    .collection('messages')
+    .add({
+      message: input,
+      user: user.displayName,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    })
     setInput("")
+    scrollToRef()          
   }
   
   return (
@@ -38,7 +66,10 @@ function Messages() {
             {roomName}
           </h3>
           <p>
-            Last seen at 19h...
+            Last seen at{" "}
+            {
+              new Date(messages[messages.length - 1]?.timestamp?.toDate()).toUTCString()
+            }
           </p>
         </Texts>
         <RightContent>
@@ -51,16 +82,19 @@ function Messages() {
         </RightContent>
       </Header>
       
-      <Content>
-        <Message>
-          <span className="name">kevin</span>
-          in consectetur purus tristique sed. <span className="timesent">3:43pm</span>
-        </Message>
-        {/* message.name === user.displayName */}
-        <Message className={`${true && 'receiver'}`}>
-          <span className="name">kevin</span>
-          sit amet, consectetur <span className="timesent">3:43pm</span>
-        </Message>
+      <Content ref={contentRef}>
+        {
+          messages.map((message) => (
+            <Message key={message.id} className={`${message.user === user.displayName && 'receiver'}`}>
+              <span className="name">{message.user}</span>
+              {message.message}<span className="timesent">
+                {
+                  new Date(message.timestamp?.toDate()).toUTCString()
+                }
+              </span>
+            </Message>
+          ))
+        }
       </Content>
       
       <Footer>

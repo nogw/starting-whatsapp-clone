@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 12px 16px;
   border-right: 1px solid lightgray;
 `;
 
@@ -30,7 +30,7 @@ export const Search = styled.div`
   display: flex;
   align-items: center;
   background-color: #f6f6f6;
-  height: 40px;
+  height: 44px;
   padding: 10px;
 `;
 
@@ -51,7 +51,10 @@ export const SearchInput = styled.div`
   > input {
     border: none;
     margin-left: 10px;
-    margin-right: 5px;
+    outline: none;
+    width: 80%;
+    margin-right: 0px;
+    padding-bottom: 2px;
   }
 `;
 

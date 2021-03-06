@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.div`
-  padding: 20px;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid lightgray;
@@ -16,14 +16,19 @@ export const Header = styled.div`
 export const Texts = styled.div`
   flex: 1;
   padding-left: 20px;
+  position: relative;
+  margin-top: 4px; 
 
   h3 {
-    margin-bottom: 4px;
+    font-size: 16px;
     font-weight: 500;
+    line-height: 16px;
   }
 
   p {
+    line-height: 16px;
     color: gray;
+    margin-top: 4px;
   }
 `;
 

@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Avatar } from '@material-ui/core'
 import { Container, Texts, NewChatMenu } from './styles';
 import database from '../../firebase'
 import { Link } from 'react-router-dom'
 
 function SidebarChatComponent({id, name, newChat, room }) {
+  const [messages, setMessages] = useState("");
 
   const createChat = () => {
     const roomName = prompt('name')
@@ -16,13 +17,25 @@ function SidebarChatComponent({id, name, newChat, room }) {
     }
   };
 
+  useEffect(() => {
+    if (id) {
+      database.collection('rooms')
+      .doc(id)
+      .collection('messages')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot((snapshot) => (
+        setMessages(snapshot.docs.map((doc) => doc.data()))
+      ))
+    }
+  }, [id])
+
   return !newChat ? (
     <Link to={`/c/${id}`}>
       <Container>
         <Avatar />
         <Texts>
-          <h2>{name}</h2>
-          <p>pai eu so viado kk</p>
+          <h3>{name}</h3>
+          <p>{messages[0]?.message}</p>
         </Texts>
       </Container>
     </Link>

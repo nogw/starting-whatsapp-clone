@@ -16,13 +16,15 @@ export const Texts = styled.div`
   margin-left: 15px;
   margin-top: 2px;
   
-  h2 {
+  h3 {
     font-size: 16px;
     line-height: 18px;
+    font-weight: 500;
   }
 
   p {
     line-height: 18px;
+    color: #676767;
   }
 `;
 
