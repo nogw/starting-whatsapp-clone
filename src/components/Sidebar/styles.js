@@ -61,6 +61,7 @@ export const SearchInput = styled.div`
 export const Chats = styled.div`
   flex: 1;
   overflow: auto;
+    position: relative;
   overflow-x: hidden;
   background-color: #fff;
 `;

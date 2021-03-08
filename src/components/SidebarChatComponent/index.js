@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar } from '@material-ui/core'
-import { Container, Texts, NewChatMenu } from './styles';
+import { Container, Texts, NewChatMenu, Button } from './styles';
 import database from '../../firebase'
 import { Link } from 'react-router-dom'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 function SidebarChatComponent({id, name, newChat, room }) {
   const [messages, setMessages] = useState("");
@@ -41,9 +43,11 @@ function SidebarChatComponent({id, name, newChat, room }) {
     </Link>
   ) : (
     <NewChatMenu onClick={createChat}>
-      <Container>
-        <h2>add new chat</h2>
-      </Container>
+      <Button>
+        <Fab size="small" color="inherit">
+          <AddIcon />
+        </Fab>
+      </Button>
     </NewChatMenu>
   )
 }

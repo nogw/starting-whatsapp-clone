@@ -5,8 +5,6 @@ import { Container } from './styles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function Whatsapp() {
-  const [user, setUser] = useState(null)
-
   return (
     <Container>
       <Router>
@@ -16,7 +14,6 @@ function Whatsapp() {
             <Messages />
           </Route>
           <Route path="/">
-            <Messages />
           </Route>
         </Switch>
       </Router>

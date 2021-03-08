@@ -12,6 +12,13 @@ export const Container = styled.div`
   }
 `;
 
+export const Button = styled.div `
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+
+`
+
 export const Texts = styled.div` 
   margin-left: 15px;
   margin-top: 2px;
@@ -25,6 +32,10 @@ export const Texts = styled.div`
   p {
     line-height: 18px;
     color: #676767;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 150px;
   }
 `;
 
